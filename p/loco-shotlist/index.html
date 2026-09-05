@@ -316,7 +316,7 @@ body.dragging .opts .opt{transition:transform 140ms var(--ease)}
   const KEY = 'shotlist-local-' + SNAP.id;
   const now = () => new Date().toISOString().slice(0, 16).replace('T', ' ');
 
-  if (new URLSearchParams(location.search).has('reset')) { try { localStorage.removeItem(KEY); localStorage.removeItem('shotlist-zoom'); } catch (e) {} location.replace(location.pathname); }
+  if (new URLSearchParams(location.search).has('reset')) { try { localStorage.removeItem(KEY); localStorage.removeItem('shotlist-zoom'); localStorage.removeItem('shotlist-lang-' + SNAP.id); } catch (e) {} location.replace(location.pathname); }
 
   // 80% on a touch device, so a phone shows more of the table than the app's 90% default.
   // Seeded only when nothing is stored, so it is a default the reader can still change,
@@ -324,6 +324,13 @@ body.dragging .opts .opt{transition:transform 140ms var(--ease)}
   try {
     if (localStorage.getItem('shotlist-zoom') === null && matchMedia('(pointer: coarse)').matches)
       localStorage.setItem('shotlist-zoom', '0.8');
+  } catch (e) {}
+
+  // the crew should land on the tightened English, not the raw draft with its typos.
+  // Seeded, not forced: the switch still cycles to Oleg's own wording and to Spanish.
+  try {
+    const LK = 'shotlist-lang-' + SNAP.id;
+    if (localStorage.getItem(LK) === null) localStorage.setItem(LK, 'en2');
   } catch (e) {}
 
   let S;
