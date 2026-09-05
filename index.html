@@ -32,11 +32,31 @@ h1 small{display:block;font-size:11px;font-weight:600;color:var(--fg3);letter-sp
 
 .sec{font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin:16px 0 0;padding-bottom:6px;border-bottom:1px solid var(--line)}
 .sec:first-of-type{margin-top:0}
+#cards .sec:first-of-type{margin-top:0}
 
-#list{display:grid;grid-template-columns:1fr;gap:10px;align-items:start}
-@media (min-width:700px){ #list{grid-template-columns:repeat(auto-fill,minmax(360px,1fr));gap:12px} }
-#list .sec{grid-column:1/-1}
+#cards{display:grid;grid-template-columns:1fr;gap:10px;align-items:start}
 .card{background:var(--bg2);border:1px solid var(--line);border-radius:var(--r3);padding:14px}
+
+/* the wide layout: the same table he works in, shown the moment there is room for it -
+   a phone turned sideways is 812px and gets it, a phone held upright does not */
+#table{display:none}
+@media (min-width:700px){
+  #cards{display:none}
+  #table{display:block}
+}
+table{width:100%;border-collapse:collapse;table-layout:fixed;font-size:13.5px}
+thead th{position:sticky;top:57px;z-index:5;background:var(--bg3);text-align:left;font-size:10.5px;font-weight:800;
+  letter-spacing:.08em;text-transform:uppercase;color:var(--fg3);padding:8px 10px;border-bottom:1px solid var(--line2);white-space:nowrap}
+tbody td{padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top;line-height:1.45}
+tbody tr:hover td{background:var(--bg2)}
+td.tcc{font-variant-numeric:tabular-nums;font-weight:700;white-space:nowrap;color:var(--fg)}
+td.dc{color:var(--fg)}
+td .pill{margin:0 3px 3px 0}
+tr.secrow td{background:var(--bg);padding:16px 10px 6px;border-bottom:1px solid var(--line2);
+  font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}
+tr.secrow:first-child td{padding-top:4px}
+col.c-time{width:104px} col.c-set{width:13%} col.c-cast{width:13%}
+col.c-lens{width:62px} col.c-frame{width:66px} col.c-t_of_s{width:76px} col.c-action{width:96px}
 .top{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:10px}
 .tc{font-variant-numeric:tabular-nums;font-weight:800;font-size:15px;color:var(--fg);white-space:nowrap}
 .id{font-size:11px;font-weight:700;color:var(--fg3);letter-spacing:.06em;margin-left:auto}
@@ -58,7 +78,12 @@ footer{margin-top:34px;padding-top:16px;border-top:1px solid var(--line);font-si
   .tc{font-size:14px}
 }
 @media print{
-  #list{grid-template-columns:1fr}
+  #cards{display:none}
+  #table{display:block}
+  thead th{position:static;background:none;color:#000;border-bottom:1px solid #000}
+  tbody td{border-bottom:1px solid #ccc}
+  tbody tr{break-inside:avoid;page-break-inside:avoid}
+  tr.secrow td{background:none;color:#000}
   body{background:#fff;color:#000}
   header{position:static;background:none;border-bottom:1px solid #ccc}
   .lang{display:none}
@@ -79,11 +104,14 @@ footer{margin-top:34px;padding-top:16px;border-top:1px solid var(--line);font-si
 </header>
 <div class="wrap">
   <div class="meta"><span><b>18</b> shots</span> <span><b>8</b> sets</span> <span>Dancers · Extras · RVFV · YAPI</span></div>
-  <main id="list"></main>
+  <main>
+    <div id="cards"></div>
+    <div id="table"></div>
+  </main>
   <footer>Read-only copy for the shoot. The live list stays with Oleg, so a change he makes today reaches this page only when it is republished.<br>Times are the track's timecodes, not a call sheet.</footer>
 </div>
 <script>
-const DATA = {"title":"RVFV x YAPI - LOCO","rows":[{"id":"s01","tc":"0:00 - 0:08","sec":"Intro","set":["Terraza"],"cast":["Extras"],"spec":[["Lens",["20mm"]],["Frame",["Mid"]],["T of S",["HandHeld"]],["Action",["B-Roll"]]],"d":{"en2":"B-rolls extras or dancers hanging around doing the \"loco loco\" move, laughing.","es":"B-rolls de extras o bailarines por ahi haciendo el paso \"loco loco\", riendose."}},{"id":"s02","tc":"0:08 - 0:15","sec":"Estribillo","set":["Main Set Inside"],"cast":["RVFV","Dancers","Extras"],"spec":[["Lens",["58mm"]],["Frame",["Mid"]],["T of S",["Steadi"]],["Action",["B-Roll","Perform."]]],"d":{"en2":"One long take: out of the main door with a group of 2, through the terraza, camera catching RVFV's face for the intro playback. He stays till the end of Estribillo, then approaches the stairs, camera follows him a bit before we cut to another scene.","es":"Un solo plano secuencia: salimos por la puerta principal con un grupo de 2, cruzamos la terraza y la camara engancha la cara de RVFV para el playback del intro. Se queda hasta el final del estribillo, luego se acerca a las escaleras, la camara le sigue un poco antes de cortar a otra escena."}},{"id":"s12","tc":"0:15 - 0:18","sec":"Estribillo","set":["Main Set Inside"],"cast":["Dancers","Extras"],"spec":[["Lens",["58mm"]],["Frame",["Mid"]],["T of S",["Steadi"]],["Action",["B-Roll"]]],"d":{"en2":"Dancers testing the dance and laughing a lot, preparing themselves to go and perform. It's a warm up.","es":"Los bailarines probando el baile y riendose mucho, preparandose para salir a hacerlo. Es el calentamiento."}},{"id":"s13","tc":"0:18 - 0:26","sec":"Estribillo","set":["Main Set Inside"],"cast":["RVFV","Dancers","Extras"],"spec":[["Lens",["58mm"]],["Frame",["Mid"]],["T of S",["Steadi"]],["Action",["B-Roll","Perform."]]],"d":{"en2":"RVFV starts moving towards the exit, camera follows him a bit, before we cut to another scene.","es":"RVFV empieza a moverse hacia la salida, la camara le sigue un poco, antes de cortar a otra escena."}},{"id":"s03","tc":"0:26 - 0:35","sec":"Verso 1/2","set":["Main Set Exterior"],"cast":["Dancers"],"spec":[["Lens",["58mm"]],["Frame",["Mid"]],["T of S",["Steadi"]],["Action",["B-Roll"]]],"d":{"en2":"Group choreography","es":"Coreografia de grupo"}},{"id":"s14","tc":"0:26 - 0:35","sec":"Verso 1/2","set":["Main Set Exterior"],"cast":["RVFV","Dancers"],"spec":[["Lens",["58mm"]],["Frame",["Wide"]],["T of S",["Steadi"]],["Action",["Perform."]]],"d":{"en2":"💃🔥RVFV entering the set from the stairs, dancers performing synchronized choreography (wide+mid)","es":"💃🔥RVFV entrando al set por las escaleras, bailarines haciendo la coreografia sincronizada"}},{"id":"s04","tc":"0:35 - 0:44","sec":"Build Up","set":["❓❓❓❓"],"cast":["RVFV"],"spec":[["Lens",["37mm"]],["Frame",["Mid"]],["T of S",["Steadi"]],["Action",["Perform."]]],"d":{"en2":"❓❓❓❓❓","es":"RVFV sentado, bebiendo, dejando el vaso en la mesa. Puede ser plano general + primer plano. Mesa llena de gente bebiendo y jugando."}},{"id":"s05","tc":"0:44 - 1:03","sec":"Verso 2/2","set":["Main Set Exterior"],"cast":["Dancers"],"spec":[["Lens",["20mm"]],["Frame",["Wide"]],["T of S",["Steadi"]],["Action",["B-Roll"]]],"d":{"en2":"💃 Dancers freestyle (choreography if we can)","es":"💃 Freestyle de los bailarines (coreografia si nos da tiempo)"}},{"id":"s19","tc":"0:44 - 1:03","sec":"Verso 2/2","set":["Main Set Exterior"],"cast":["Dancers"],"spec":[["Lens",["37mm"]],["Frame",["Mid"]],["T of S",["Steadi"]],["Action",["B-Roll"]]],"d":{"en2":"💃 300FPS (SLOW MOTION), close b-rolls of the dancers.","es":"💃 300FPS (CAMARA LENTA), b-rolls cerrados de los bailarines."}},{"id":"s20","tc":"0:44 - 1:03","sec":"Verso 2/2","set":["Wooden wall"],"cast":["RVFV"],"spec":[["Lens",["37mm"]],["Frame",["Mid"]],["T of S",["Tripod"]],["Action",["Perform."]]],"d":{"en2":"Static mid shot, overhead light, RVFV pegado to the wall","es":"Plano medio estatico, luz cenital, RVFV pegado a la pared"}},{"id":"s06","tc":"1:03 - 1:11","sec":"Verso 1/2 YAPI","set":["Garage"],"cast":["YAPI"],"spec":[["Lens",["20mm"]],["Frame",["Wide"]],["T of S",["Steadi"]],["Action",["Perform."]]],"d":{"en2":"Empty garage, wide Ronin entry, YAPI solo.","es":"Garaje vacio, entrada amplia con Ronin, YAPI solo."}},{"id":"s11","tc":"1:11 - 1:30","sec":"Verso 1/2 YAPI","set":["Green Wall"],"cast":["YAPI"],"spec":[["Lens",["58mm"]],["Frame",["Mid"]],["T of S",["Tripod"]],["Action",["Perform."]]],"d":{"en2":"YAPI sidewise, green flat background, one-third composition.","es":"YAPI de lado, fondo verde plano, composicion a un tercio."}},{"id":"s07","tc":"1:30 - 1:47","sec":"Verso 2/2 YAPI","set":["Main Set Exterior"],"cast":["Extras","YAPI"],"spec":[["Lens",["37mm"]],["Frame",["Mid"]],["T of S",["HandHeld"]],["Action",["Perform."]]],"d":{"en2":"YAPI SITTING ON THE STAIRS with the drink, we don't go wide, we stay with him. (⚠️ CAN BE HAND HELD AS WELL AS Steadi). People hanging around.","es":"YAPI SENTADO EN LAS ESCALERAS con la copa, no abrimos, nos quedamos con el. (⚠️ PUEDE SER A MANO O CON Steadi). Gente por ahi."}},{"id":"s08","tc":"1:47 - 2:05","sec":"Build Up (both)","set":["Terraza"],"cast":["RVFV","YAPI","Dancers"],"spec":[["Lens",["37mm"]],["Frame",["Mid"]],["T of S",["Steadi"]],["Action",["Perform."]]],"d":{"en2":"RVFV + YAPI on a couch, people around having fun. Camera pushes back from RVFV's face, hiding YAPI behind it, and on the pushback reveals him sitting next to RVFV.","es":"RVFV + YAPI en un sofa, gente alrededor pasandolo bien. La camara retrocede desde la cara de RVFV, escondiendo a YAPI detras, y en el retroceso lo descubre sentado a su lado."}},{"id":"s09","tc":"2:05 - 2:23","sec":"Estribillo","set":["Main Set Exterior"],"cast":["YAPI","Dancers"],"spec":[["Lens",["20mm"]],["Frame",["Wide"]],["T of S",["Steadi"]],["Action",["Perform."]]],"d":{"en2":"MAIN FULL SET, RVFV + YAPI finishing the song. Choreography by the dancers.","es":"SET PRINCIPAL COMPLETO, RVFV + YAPI rematando la cancion. Coreografia de los bailarines."}},{"id":"s10","tc":"2:23 - 2:42","sec":"Outro","set":["Main Set Exterior"],"cast":["Extras"],"spec":[["Lens",["20mm"]],["Frame",["Mid"]],["T of S",["Steadi"]],["Action",["Perform."]]],"d":{"en2":"B-roll recap.","es":"Repaso de b-roll."}},{"id":"s21","tc":"","sec":"B-roll, no timecode","set":["Pool"],"cast":["Extras"],"spec":[["Lens",["16mm"]],["Frame",["Mid"]],["T of S",["HandHeld"]],["Action",["B-Roll"]]],"d":{"en2":"B-rolls POOL - PEOPLE - GLASS BOX","es":"B-rolls PISCINA - GENTE - CAJA DE CRISTAL"}},{"id":"s22","tc":"","sec":"B-roll, no timecode","set":["Main Set Exterior"],"cast":["Extras"],"spec":[["Lens",["58mm"]],["Frame",["Mid"]],["T of S",["HandHeld"]],["Action",["B-Roll"]]],"d":{"en2":"B-rolls Beer Pong","es":"B-rolls Beer Pong"}}],"colors":{"set␟Terraza":"#518f13","cast␟Extras":"#772727","lens␟20mm":"#404040","frame␟Mid":"#404040","t_of_s␟HandHeld":"#772727","action␟B-Roll":"#0f7e80","set␟Main Set Inside":"#9d6102","cast␟RVFV":"#294161","cast␟Dancers":"#437a5d","lens␟58mm":"#404040","t_of_s␟Steadi":"#2f434c","action␟Perform.":"#03591d","set␟Main Set Exterior":"#bb4b08","frame␟Wide":"#404040","set␟❓❓❓❓":"#292929","lens␟37mm":"#404040","set␟Wooden wall":"#66472a","t_of_s␟Tripod":"#696969","set␟Garage":"#404040","cast␟YAPI":"#b8860b","set␟Green Wall":"#03591d","set␟Pool":"#1f3e6b","lens␟16mm":"#404040"},"langs":["en2","es"],"sets":["Garage","Green Wall","Main Set Exterior","Main Set Inside","Pool","Terraza","Wooden wall","❓❓❓❓"],"cast":["Dancers","Extras","RVFV","YAPI"]};
+const DATA = {"title":"RVFV x YAPI - LOCO","rows":[{"id":"s01","tc":"0:00 - 0:08","sec":"Intro","set":["Terraza"],"cast":["Extras"],"spec":[["lens","Lens",["20mm"]],["frame","Frame",["Mid"]],["t_of_s","T of S",["HandHeld"]],["action","Action",["B-Roll"]]],"d":{"en2":"B-rolls extras or dancers hanging around doing the \"loco loco\" move, laughing.","es":"B-rolls de extras o bailarines por ahi haciendo el paso \"loco loco\", riendose."}},{"id":"s02","tc":"0:08 - 0:15","sec":"Estribillo","set":["Main Set Inside"],"cast":["RVFV","Dancers","Extras"],"spec":[["lens","Lens",["58mm"]],["frame","Frame",["Mid"]],["t_of_s","T of S",["Steadi"]],["action","Action",["B-Roll","Perform."]]],"d":{"en2":"One long take: out of the main door with a group of 2, through the terraza, camera catching RVFV's face for the intro playback. He stays till the end of Estribillo, then approaches the stairs, camera follows him a bit before we cut to another scene.","es":"Un solo plano secuencia: salimos por la puerta principal con un grupo de 2, cruzamos la terraza y la camara engancha la cara de RVFV para el playback del intro. Se queda hasta el final del estribillo, luego se acerca a las escaleras, la camara le sigue un poco antes de cortar a otra escena."}},{"id":"s12","tc":"0:15 - 0:18","sec":"Estribillo","set":["Main Set Inside"],"cast":["Dancers","Extras"],"spec":[["lens","Lens",["58mm"]],["frame","Frame",["Mid"]],["t_of_s","T of S",["Steadi"]],["action","Action",["B-Roll"]]],"d":{"en2":"Dancers testing the dance and laughing a lot, preparing themselves to go and perform. It's a warm up.","es":"Los bailarines probando el baile y riendose mucho, preparandose para salir a hacerlo. Es el calentamiento."}},{"id":"s13","tc":"0:18 - 0:26","sec":"Estribillo","set":["Main Set Inside"],"cast":["RVFV","Dancers","Extras"],"spec":[["lens","Lens",["58mm"]],["frame","Frame",["Mid"]],["t_of_s","T of S",["Steadi"]],["action","Action",["B-Roll","Perform."]]],"d":{"en2":"RVFV starts moving towards the exit, camera follows him a bit, before we cut to another scene.","es":"RVFV empieza a moverse hacia la salida, la camara le sigue un poco, antes de cortar a otra escena."}},{"id":"s03","tc":"0:26 - 0:35","sec":"Verso 1/2","set":["Main Set Exterior"],"cast":["Dancers"],"spec":[["lens","Lens",["58mm"]],["frame","Frame",["Mid"]],["t_of_s","T of S",["Steadi"]],["action","Action",["B-Roll"]]],"d":{"en2":"Group choreography","es":"Coreografia de grupo"}},{"id":"s14","tc":"0:26 - 0:35","sec":"Verso 1/2","set":["Main Set Exterior"],"cast":["RVFV","Dancers"],"spec":[["lens","Lens",["58mm"]],["frame","Frame",["Wide"]],["t_of_s","T of S",["Steadi"]],["action","Action",["Perform."]]],"d":{"en2":"💃🔥RVFV entering the set from the stairs, dancers performing synchronized choreography (wide+mid)","es":"💃🔥RVFV entrando al set por las escaleras, bailarines haciendo la coreografia sincronizada"}},{"id":"s04","tc":"0:35 - 0:44","sec":"Build Up","set":["❓❓❓❓"],"cast":["RVFV"],"spec":[["lens","Lens",["37mm"]],["frame","Frame",["Mid"]],["t_of_s","T of S",["Steadi"]],["action","Action",["Perform."]]],"d":{"en2":"❓❓❓❓❓","es":"RVFV sentado, bebiendo, dejando el vaso en la mesa. Puede ser plano general + primer plano. Mesa llena de gente bebiendo y jugando."}},{"id":"s05","tc":"0:44 - 1:03","sec":"Verso 2/2","set":["Main Set Exterior"],"cast":["Dancers"],"spec":[["lens","Lens",["20mm"]],["frame","Frame",["Wide"]],["t_of_s","T of S",["Steadi"]],["action","Action",["B-Roll"]]],"d":{"en2":"💃 Dancers freestyle (choreography if we can)","es":"💃 Freestyle de los bailarines (coreografia si nos da tiempo)"}},{"id":"s19","tc":"0:44 - 1:03","sec":"Verso 2/2","set":["Main Set Exterior"],"cast":["Dancers"],"spec":[["lens","Lens",["37mm"]],["frame","Frame",["Mid"]],["t_of_s","T of S",["Steadi"]],["action","Action",["B-Roll"]]],"d":{"en2":"💃 300FPS (SLOW MOTION), close b-rolls of the dancers.","es":"💃 300FPS (CAMARA LENTA), b-rolls cerrados de los bailarines."}},{"id":"s20","tc":"0:44 - 1:03","sec":"Verso 2/2","set":["Wooden wall"],"cast":["RVFV"],"spec":[["lens","Lens",["37mm"]],["frame","Frame",["Mid"]],["t_of_s","T of S",["Tripod"]],["action","Action",["Perform."]]],"d":{"en2":"Static mid shot, overhead light, RVFV pegado to the wall","es":"Plano medio estatico, luz cenital, RVFV pegado a la pared"}},{"id":"s06","tc":"1:03 - 1:11","sec":"Verso 1/2 YAPI","set":["Garage"],"cast":["YAPI"],"spec":[["lens","Lens",["20mm"]],["frame","Frame",["Wide"]],["t_of_s","T of S",["Steadi"]],["action","Action",["Perform."]]],"d":{"en2":"Empty garage, wide Ronin entry, YAPI solo.","es":"Garaje vacio, entrada amplia con Ronin, YAPI solo."}},{"id":"s11","tc":"1:11 - 1:30","sec":"Verso 1/2 YAPI","set":["Green Wall"],"cast":["YAPI"],"spec":[["lens","Lens",["58mm"]],["frame","Frame",["Mid"]],["t_of_s","T of S",["Tripod"]],["action","Action",["Perform."]]],"d":{"en2":"YAPI sidewise, green flat background, one-third composition.","es":"YAPI de lado, fondo verde plano, composicion a un tercio."}},{"id":"s07","tc":"1:30 - 1:47","sec":"Verso 2/2 YAPI","set":["Main Set Exterior"],"cast":["Extras","YAPI"],"spec":[["lens","Lens",["37mm"]],["frame","Frame",["Mid"]],["t_of_s","T of S",["HandHeld"]],["action","Action",["Perform."]]],"d":{"en2":"YAPI SITTING ON THE STAIRS with the drink, we don't go wide, we stay with him. (⚠️ CAN BE HAND HELD AS WELL AS Steadi). People hanging around.","es":"YAPI SENTADO EN LAS ESCALERAS con la copa, no abrimos, nos quedamos con el. (⚠️ PUEDE SER A MANO O CON Steadi). Gente por ahi."}},{"id":"s08","tc":"1:47 - 2:05","sec":"Build Up (both)","set":["Terraza"],"cast":["RVFV","YAPI","Dancers"],"spec":[["lens","Lens",["37mm"]],["frame","Frame",["Mid"]],["t_of_s","T of S",["Steadi"]],["action","Action",["Perform."]]],"d":{"en2":"RVFV + YAPI on a couch, people around having fun. Camera pushes back from RVFV's face, hiding YAPI behind it, and on the pushback reveals him sitting next to RVFV.","es":"RVFV + YAPI en un sofa, gente alrededor pasandolo bien. La camara retrocede desde la cara de RVFV, escondiendo a YAPI detras, y en el retroceso lo descubre sentado a su lado."}},{"id":"s09","tc":"2:05 - 2:23","sec":"Estribillo","set":["Main Set Exterior"],"cast":["YAPI","Dancers"],"spec":[["lens","Lens",["20mm"]],["frame","Frame",["Wide"]],["t_of_s","T of S",["Steadi"]],["action","Action",["Perform."]]],"d":{"en2":"MAIN FULL SET, RVFV + YAPI finishing the song. Choreography by the dancers.","es":"SET PRINCIPAL COMPLETO, RVFV + YAPI rematando la cancion. Coreografia de los bailarines."}},{"id":"s10","tc":"2:23 - 2:42","sec":"Outro","set":["Main Set Exterior"],"cast":["Extras"],"spec":[["lens","Lens",["20mm"]],["frame","Frame",["Mid"]],["t_of_s","T of S",["Steadi"]],["action","Action",["Perform."]]],"d":{"en2":"B-roll recap.","es":"Repaso de b-roll."}},{"id":"s21","tc":"","sec":"B-roll, no timecode","set":["Pool"],"cast":["Extras"],"spec":[["lens","Lens",["16mm"]],["frame","Frame",["Mid"]],["t_of_s","T of S",["HandHeld"]],["action","Action",["B-Roll"]]],"d":{"en2":"B-rolls POOL - PEOPLE - GLASS BOX","es":"B-rolls PISCINA - GENTE - CAJA DE CRISTAL"}},{"id":"s22","tc":"","sec":"B-roll, no timecode","set":["Main Set Exterior"],"cast":["Extras"],"spec":[["lens","Lens",["58mm"]],["frame","Frame",["Mid"]],["t_of_s","T of S",["HandHeld"]],["action","Action",["B-Roll"]]],"d":{"en2":"B-rolls Beer Pong","es":"B-rolls Beer Pong"}}],"colors":{"set␟Terraza":"#518f13","cast␟Extras":"#772727","lens␟20mm":"#404040","frame␟Mid":"#404040","t_of_s␟HandHeld":"#772727","action␟B-Roll":"#0f7e80","set␟Main Set Inside":"#9d6102","cast␟RVFV":"#294161","cast␟Dancers":"#437a5d","lens␟58mm":"#404040","t_of_s␟Steadi":"#2f434c","action␟Perform.":"#03591d","set␟Main Set Exterior":"#bb4b08","frame␟Wide":"#404040","set␟❓❓❓❓":"#292929","lens␟37mm":"#404040","set␟Wooden wall":"#66472a","t_of_s␟Tripod":"#696969","set␟Garage":"#404040","cast␟YAPI":"#b8860b","set␟Green Wall":"#03591d","set␟Pool":"#1f3e6b","lens␟16mm":"#404040"},"langs":["en2","es"],"sets":["Garage","Green Wall","Main Set Exterior","Main Set Inside","Pool","Terraza","Wooden wall","❓❓❓❓"],"cast":["Dancers","Extras","RVFV","YAPI"]};
 const LS = 'loco-shotlist-lang';
 let lang = (() => { try { const v = localStorage.getItem(LS); return DATA.langs.includes(v) ? v : DATA.langs[0]; } catch (e) { return DATA.langs[0]; } })();
 const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
@@ -92,20 +120,42 @@ function lum(hex){ const m=/^#?([0-9a-f]{2})([0-9a-f]{2})([0-9a-f]{2})/i.exec(he
   return 0.2126*r+0.7152*g+0.0722*b; }
 const pill = (key, v) => { const bg = DATA.colors[key + '\u241f' + v] || '#504945';
   return `<span class="pill${lum(bg)>0.45?' bright':''}" style="background:${bg}">${esc(v)}</span>`; };
+const text = r => r.d[lang] || r.d[DATA.langs[0]] || '';
 function render(){
-  let out = '', sec = null;
+  // one loop feeds both layouts, so the table and the cards cannot drift apart
+  let cards = '', rows = '', sec = null;
+  const cols = DATA.rows[0] ? DATA.rows[0].spec.map(([k, name]) => [k, name]) : [];
   for (const r of DATA.rows){
-    if (r.sec !== sec){ sec = r.sec; if (sec) out += `<h2 class="sec">${esc(sec)}</h2>`; }
-    const spec = r.spec.filter(([, v]) => v.length).map(([k, v]) =>
-      `<span class="k">${esc(k)}</span>` + v.map(x => pill(k.toLowerCase().replace(/[^a-z]/g,''), x)).join('')).join('');
-    out += `<article class="card">
+    if (r.sec !== sec){
+      sec = r.sec;
+      if (sec){
+        cards += `<h2 class="sec">${esc(sec)}</h2>`;
+        rows += `<tr class="secrow"><td colspan="${cols.length + 4}">${esc(sec)}</td></tr>`;
+      }
+    }
+    const spec = r.spec.filter(([, , v]) => v.length).map(([k, name, v]) =>
+      `<span class="k">${esc(name)}</span>` + v.map(x => pill(k, x)).join('')).join('');
+    cards += `<article class="card">
       <div class="top">${r.tc ? `<span class="tc">${esc(r.tc)}</span>` : ''}<span class="id">${esc(r.id.toUpperCase())}</span></div>
       <div class="pills">${r.set.map(v => pill('set', v)).join('')}${r.cast.map(v => pill('cast', v)).join('')}</div>
-      <p class="d">${esc(r.d[lang] || r.d[DATA.langs[0]] || '')}</p>
+      <p class="d">${esc(text(r))}</p>
       ${spec ? `<div class="spec">${spec}</div>` : ''}
     </article>`;
+    rows += `<tr>
+      <td class="tcc">${esc(r.tc)}</td>
+      <td>${r.set.map(v => pill('set', v)).join('')}</td>
+      <td>${r.cast.map(v => pill('cast', v)).join('')}</td>
+      ${r.spec.map(([k, , v]) => `<td>${v.map(x => pill(k, x)).join('')}</td>`).join('')}
+      <td class="dc">${esc(text(r))}</td>
+    </tr>`;
   }
-  document.getElementById('list').innerHTML = out;
+  document.getElementById('cards').innerHTML = cards;
+  document.getElementById('table').innerHTML = `<table>
+    <colgroup><col class="c-time"><col class="c-set"><col class="c-cast">${
+      cols.map(([k]) => `<col class="c-${k}">`).join('')}<col></colgroup>
+    <thead><tr><th>Time</th><th>Set</th><th>Cast</th>${
+      cols.map(([, name]) => `<th>${esc(name)}</th>`).join('')}<th>Description</th></tr></thead>
+    <tbody>${rows}</tbody></table>`;
   document.querySelectorAll('.lang button').forEach(b => b.setAttribute('aria-pressed', b.dataset.l === lang));
   document.documentElement.lang = lang === 'es' ? 'es' : 'en';
 }
