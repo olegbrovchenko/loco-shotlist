@@ -317,6 +317,7 @@ body.dragging .opts .opt{transition:transform 140ms var(--ease)}
   html,body{background:#fff;color:#000}
   /* every control is noise on paper */
   .toolbar,.audio,.drawer,.pop,#status,.rz{display:none!important}
+  .demo-banner{display:none!important}   /* the published copy's footer notice */
   tfoot{display:none!important}          /* the "+ New" row */
   .pill .x{display:none!important}       /* the per-tag remove cross */
   td.gutter,th.gutter{display:none!important}  /* the drag grip lane */
@@ -422,6 +423,7 @@ body.dragging .opts .opt{transition:transform 140ms var(--ease)}
   // one line, because a producer who reorders rows must not think Oleg can see it
   addEventListener('DOMContentLoaded', () => {
     const d = document.createElement('div');
+    d.className = 'demo-banner';   // so the print stylesheet can drop it
     d.style.cssText = 'position:fixed;left:0;right:0;bottom:0;z-index:99;background:#32302f;border-top:1px solid #504945;' +
       'color:#c8c8c8;font:12px/1.4 -apple-system,system-ui,sans-serif;padding:8px 14px;display:flex;gap:10px;align-items:center';
     d.innerHTML = '<span style="flex:1">Read-and-play copy of RVFV x YAPI - LOCO. Edit anything you like \u2014 it stays in <b>this browser</b> ' +
