@@ -306,33 +306,6 @@ body.dragging .opts .opt{transition:transform 140ms var(--ease)}
   .field{grid-template-columns:1fr;gap:2px}
   .field .fl{min-height:0;margin-top:var(--s1)}
 }
-
-/* ---------------------------------------------------------------- print
-   A shot list on paper is a different object from the app: no controls, no
-   affordances, nothing that invites a click. Landscape, because the columns
-   are what the crew reads and portrait squeezes the description to a ribbon. */
-@page{size:A4 landscape;margin:8mm}
-@media print{
-  :root{color-scheme:light}
-  html,body{background:#fff;color:#000}
-  /* every control is noise on paper */
-  .toolbar,.audio,.drawer,.pop,#status,.rz{display:none!important}
-  .demo-banner{display:none!important}   /* the published copy's footer notice */
-  tfoot{display:none!important}          /* the "+ New" row */
-  .pill .x{display:none!important}       /* the per-tag remove cross */
-  td.gutter,th.gutter{display:none!important}  /* the drag grip lane */
-  /* the table owns the sheet */
-  .wrap{overflow:visible!important;max-height:none!important;border:0}
-  table{width:100%!important;table-layout:auto!important}
-  colgroup{display:none}
-  th,td{white-space:normal!important;word-break:normal;overflow-wrap:anywhere}
-  .cell{white-space:normal!important;overflow:visible!important;text-overflow:clip!important;-webkit-line-clamp:none!important;max-height:none!important}
-  /* keep the tag colours: they are how the crew finds its block at a glance */
-  .pill{-webkit-print-color-adjust:exact;print-color-adjust:exact}
-  /* a row split across a page break is a misread shot */
-  thead{display:table-header-group}
-  tr{break-inside:avoid;page-break-inside:avoid}
-}
 </style>
 <script>
 /* Offline adapter. The app below is unmodified and still talks to /api/<pid>/...; this
@@ -423,7 +396,6 @@ body.dragging .opts .opt{transition:transform 140ms var(--ease)}
   // one line, because a producer who reorders rows must not think Oleg can see it
   addEventListener('DOMContentLoaded', () => {
     const d = document.createElement('div');
-    d.className = 'demo-banner';   // so the print stylesheet can drop it
     d.style.cssText = 'position:fixed;left:0;right:0;bottom:0;z-index:99;background:#32302f;border-top:1px solid #504945;' +
       'color:#c8c8c8;font:12px/1.4 -apple-system,system-ui,sans-serif;padding:8px 14px;display:flex;gap:10px;align-items:center';
     d.innerHTML = '<span style="flex:1">Read-and-play copy of RVFV x YAPI - LOCO. Edit anything you like \u2014 it stays in <b>this browser</b> ' +
